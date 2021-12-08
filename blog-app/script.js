@@ -1,53 +1,52 @@
-const article = [
-  {
-    title: "The complete guide to explore Trasilvania, with your bike",
-    articleDetails: "Destination Europe",
-    addedBy: "Added by ",
-    authorMark: "Jonnathan Mercadina",
-    postDate: "July 01, 2018",
-    image: "bike.jpg",
-    paragraph1:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est totam laboriosam debitis magnam voluptatum, incidunt neque. Totam ullam non quis, repellendus molestiae in itaque natus labore quos ipsum alias, veritatis nihil! Quisquam labore, sequi minima expedita necessitatibus omnis error amet recusandae atque commodi quia! Vel laborum recusandae voluptatum rerum id harum, fuga beatae ut, consequuntur repellendus ipsum temporibus libero itaque.",
-    paragraph2:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde quod tempore quaerat deserunt. Voluptatibus possimus, magni quas rem adipisci, esse ipsa fuga, fugit eos repellendus quis? Dicta perferendis, doloremque provident repellendus natus fugit obcaecati, voluptate odio, nulla similique officia. Iure at aliquam dicta provident nulla modi optio maiores. Similique eos molestiae earum voluptatum nostrum porro, consequuntur nihil ex earum. Voluptatum placeat labore necessitatibus repellat. Repudiandae velit suscipit amet tenetur, mollitia aut dolor ipsa delectus a autem ut quibusdam incidunt? Nisi facilis voluptatem omnis debitis laborum cupiditate pariatur inventore molestiae eveniet!",
-  },
-  {
-    title: "Bucegi: Places you must visit before you die",
-    articleDetails: "Must Visit",
-    addedBy: "Added by ",
-    authorMark: "Jonnathan Mercadina",
-    postDate: "June 30, 2018",
-    image: "bucegi.jpg",
-    paragraph1:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est totam laboriosam debitis magnam voluptatum, incidunt neque. Totam ullam non quis, repellendus molestiae in itaque natus labore quos ipsum alias, veritatis nihil! Quisquam labore, sequi minima expedita necessitatibus omnis error amet recusandae atque commodi quia! Vel laborum recusandae voluptatum rerum id harum, fuga beatae ut, consequuntur repellendus ipsum temporibus libero itaque.",
-    paragraph2:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde quod tempore quaerat deserunt. Voluptatibus possimus, magni quas rem adipisci, esse ipsa fuga, fugit eos repellendus quis? Dicta perferendis, doloremque provident repellendus natus fugit obcaecati, voluptate odio, nulla similique officia. Iure at aliquam dicta provident nulla modi optio maiores. Similique eos molestiae earum voluptatum nostrum porro, consequuntur nihil ex earum. Voluptatum placeat labore necessitatibus repellat. Repudiandae velit suscipit amet tenetur, mollitia aut dolor ipsa delectus a autem ut quibusdam incidunt? Nisi facilis voluptatem omnis debitis laborum cupiditate pariatur inventore molestiae eveniet!",
-  },
-  {
-    title: "Romania: The land of dreams",
-    articleDetails: "Village",
-    addedBy: "Added by ",
-    authorMark: "Jonnathan Mercadina",
-    postDate: "June 17, 2018",
-    image: "village.jpg",
-    paragraph1:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est totam laboriosam debitis magnam voluptatum, incidunt neque. Totam ullam non quis, repellendus molestiae in itaque natus labore quos ipsum alias, veritatis nihil! Quisquam labore, sequi minima expedita necessitatibus omnis error amet recusandae atque commodi quia! Vel laborum recusandae voluptatum rerum id harum, fuga beatae ut, consequuntur repellendus ipsum temporibus libero itaque.",
-    paragraph2:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde quod tempore quaerat deserunt. Voluptatibus possimus, magni quas rem adipisci, esse ipsa fuga, fugit eos repellendus quis? Dicta perferendis, doloremque provident repellendus natus fugit obcaecati, voluptate odio, nulla similique officia. Iure at aliquam dicta provident nulla modi optio maiores. Similique eos molestiae earum voluptatum nostrum porro, consequuntur nihil ex earum. Voluptatum placeat labore necessitatibus repellat. Repudiandae velit suscipit amet tenetur, mollitia aut dolor ipsa delectus a autem ut quibusdam incidunt? Nisi facilis voluptatem omnis debitis laborum cupiditate pariatur inventore molestiae eveniet!",
-  },
-  {
-    title: "Sarmale - stuffed cabbage rolls. Good or bad?",
-    articleDetails: "Food",
-    addedBy: "Added by ",
-    authorMark: "Jonnathan Mercadina",
-    postDate: "December 29, 2017",
-    image: "sarmale.jpg",
-    paragraph1:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est totam laboriosam debitis magnam voluptatum, incidunt neque. Totam ullam non quis, repellendus molestiae in itaque natus labore quos ipsum alias, veritatis nihil! Quisquam labore, sequi minima expedita necessitatibus omnis error amet recusandae atque commodi quia! Vel laborum recusandae voluptatum rerum id harum, fuga beatae ut, consequuntur repellendus ipsum temporibus libero itaque.",
-    paragraph2:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde quod tempore quaerat deserunt. Voluptatibus possimus, magni quas rem adipisci, esse ipsa fuga, fugit eos repellendus quis? Dicta perferendis, doloremque provident repellendus natus fugit obcaecati, voluptate odio, nulla similique officia. Iure at aliquam dicta provident nulla modi optio maiores. Similique eos molestiae earum voluptatum nostrum porro, consequuntur nihil ex earum. Voluptatum placeat labore necessitatibus repellat. Repudiandae velit suscipit amet tenetur, mollitia aut dolor ipsa delectus a autem ut quibusdam incidunt? Nisi facilis voluptatem omnis debitis laborum cupiditate pariatur inventore molestiae eveniet!",
-  },
-];
+function cleanUpBody() {
+  if (body) {
+    body.querySelectorAll("*").forEach((n) => n.remove());
+  }
+}
+
+function fetchHomepageData() {
+  cleanUpBody();
+
+  fetch("http://localhost:3000/articles", {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      createHead();
+      renderNavbar();
+      createBtnAddArticle();
+      renderArticle(data);
+      renderFooter();
+      body.appendChild(createModal());
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+function fetchDetailsArticleData() {
+  cleanUpBody();
+
+  fetch("http://localhost:3000/detailsArticle", {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      createHead();
+      renderNavbar();
+      renderDetailsArticle(data);
+      renderFooter();
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
 
 function createHead() {
   let head = document.getElementsByTagName("head")[0];
@@ -93,22 +92,22 @@ function createNavbar() {
   let navItemTravel = document.createElement("a");
   navItemTravel.setAttribute("class", "nav__link");
   navItemTravel.textContent = "Travel Updates";
-  navItemTravel.href = "#";
+  navItemTravel.href = "#travel";
 
   let navItemReviews = document.createElement("a");
   navItemReviews.setAttribute("class", "nav__link");
   navItemReviews.textContent = "Review";
-  navItemReviews.href = "#";
+  navItemReviews.href = "#review";
 
   let navItemAbout = document.createElement("a");
   navItemAbout.setAttribute("class", "nav__link");
   navItemAbout.textContent = "About";
-  navItemAbout.href = "#";
+  navItemAbout.href = "#about";
 
   let navItemContact = document.createElement("a");
   navItemContact.setAttribute("class", "nav__link");
   navItemContact.textContent = "Contact";
-  navItemContact.href = "#";
+  navItemContact.href = "#contact";
 
   let divTheme = document.createElement("div");
   divTheme.setAttribute("class", "theme-switch-wrapper");
@@ -127,10 +126,6 @@ function createNavbar() {
   let sliderTheme = document.createElement("div");
   sliderTheme.setAttribute("class", "slider round");
   labelTheme.appendChild(sliderTheme);
-
-  // let emTheme = document.createElement("em");
-  // emTheme.textContent = "Enable Dark Mode!";
-  // divTheme.appendChild(emTheme);
 
   // append all to body
   body.appendChild(container);
@@ -384,21 +379,6 @@ function generateHomePage() {
   body.appendChild(createModal());
 }
 
-const detailsArticle = {
-  title: "The complete guide to explore Trasilvania, with your bike",
-  articleDetails: "Destination Europe",
-  addedBy: "Added by ",
-  authorMark: "Jonnathan Mercadina",
-  postDate: "July 01, 2018",
-  image: "bike.jpg",
-  paragraph1:
-    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est totam laboriosam debitis magnam voluptatum, incidunt neque. Totam ullam non quis, repellendus molestiae in itaque natus labore quos ipsum alias, veritatis nihil! Quisquam labore, sequi minima expedita necessitatibus omnis error amet recusandae atque commodi quia! Vel laborum recusandae voluptatum rerum id harum, fuga beatae ut, consequuntur repellendus ipsum temporibus libero itaque.",
-  paragraph2:
-    "Life is like riding a bicycle, to keep your balance you must keep moving",
-  paragraph3:
-    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est totam laboriosam debitis magnam voluptatum, incidunt neque. Totam ullam non quis, repellendus molestiae in itaque natus labore quos ipsum alias, veritatis nihil! Quisquam labore, sequi minima expedita necessitatibus omnis error amet recusandae atque commodi quia! Vel laborum recusandae voluptatum rerum id harum, fuga beatae ut, consequuntur repellendus ipsum temporibus libero itaque.",
-};
-
 function createDetailsArticle(detailsArticle) {
   const domArticle = document.createElement("article");
   domArticle.setAttribute("id", "article");
@@ -483,23 +463,22 @@ class IndexView {
 
   onRouteChange(e) {
     const hashLocation = window.location.hash.substring(1);
-    console.log(hashLocation);
     this.loadContent(hashLocation);
   }
 
   loadContent(uri) {
     const contentUri = `${uri}`;
 
-    if (body) {
-      body.querySelectorAll("*").forEach((n) => n.remove());
-    }
+    cleanUpBody();
 
     switch (contentUri) {
       case "home":
-        generateHomePage();
+        // generateHomePage();
+        fetchHomepageData();
         break;
       case "details":
-        generateDetailsPage();
+        // generateDetailsPage();
+        fetchDetailsArticleData();
         break;
       default:
         let message = document.createElement("h1");
@@ -554,7 +533,7 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("dom");
 
   console.log(window.location.hash);
-  let myRouter = new IndexView();
+  new IndexView();
 
   window.location.hash = "#home";
 });
