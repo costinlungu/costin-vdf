@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+:root {
+  --bkg-color-red: rgb(230, 0, 0);
+  --bkg-color-blue: rgb(13, 110, 253);
+  --text-color-black: rgb(0, 0, 0);
+  --bkg-color-gray: rgb(210, 213, 216);
+  --text-color-white: rgb(256, 256, 256);
+}
+
+body {
+  background-color: var(--bkg-color-gray);
+}
+
+.container-fluid {
+  display: flex;
+}
+.navbar-brand {
+  margin-left: 1rem;
+}
+.navbar-collapse {
+  justify-content: space-between;
+}
+.navbar-dark .navbar-nav .nav-link {
+  color: black;
+  font-size: 18px;
+}

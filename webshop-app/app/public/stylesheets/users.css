@@ -1,0 +1,10 @@
+.main__container {
+  width: 90vw;
+  margin: 30px auto;
+}
+.title__container {
+  text-align: center;
+}
+.btns__list__item {
+  margin: auto 0;
+}

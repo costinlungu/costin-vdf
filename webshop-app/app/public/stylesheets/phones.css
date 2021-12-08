@@ -1,0 +1,91 @@
+* {
+  box-sizing: border-box;
+}
+:root {
+  --bkg-color-red: rgb(230, 0, 0);
+  --bkg-color-blue: rgb(13, 110, 253);
+  --text-color-white: rgb(256, 256, 256);
+  --text-color-black: rgb(0, 0, 0);
+  --bkg-color-gray: rgb(210, 213, 216);
+}
+
+body {
+  background-color: var(--bkg-color-gray);
+}
+.container-fluid {
+  display: flex;
+}
+.navbar-brand {
+  margin-left: 1rem;
+}
+.navbar-collapse {
+  justify-content: space-between;
+}
+.navbar-dark .navbar-nav .nav-link {
+  color: black;
+  font-size: 18px;
+}
+
+.main-container {
+  /* left: 0; */
+  /* right: 0; */
+  margin: auto;
+
+  display: block;
+  justify-content: center;
+
+  margin-top: 20px;
+  width: 90vw;
+  text-align: center;
+}
+.container-phones h2 {
+  color: red;
+}
+.filters-group {
+  display: flex;
+  justify-content: space-evenly;
+}
+.filter-header {
+  font-weight: bold;
+}
+.filter-by-brand-p,
+.filter-by-price-p,
+.filter-by-os-p {
+  margin: 0;
+}
+
+.container-phones ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  row-gap: 20px;
+  column-gap: 20px;
+  padding: 0;
+}
+
+.phone {
+  list-style-type: none;
+  background-color: var(--bkg-color-white);
+  width: 29vw;
+}
+.phoneName {
+  margin-top: 20px;
+}
+.phone a {
+  text-decoration: none;
+  color: var(--bkg-color-red);
+}
+.phone p {
+  color: var(--text-color-black);
+}
+.phoneImage {
+  background-color: var(--bkg-color-gray);
+}
+.phone img {
+  width: 40%;
+}
+
+.discounted {
+  text-decoration: line-through;
+  color: rebeccapurple;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/_head'); %>
+
+  <body class="body-container">
+    <%- include('./partials/_navbar'); %>
+
+    <main class="main__container">
+      <div class="login__container">
+        <h1 class="main__title">Register a new account</h1>
+        <hr />
+
+        <form class="form-login needs-validation" novalidate>
+          <div class="mb-3">
+            <label for="validationCustomUsername" class="form-label"
+              >Username</label
+            >
+            <input
+              placeholder="Username"
+              type="text"
+              class="form-control"
+              id="validationCustomUsername"
+              aria-describedby="emailHelp"
+              required
+            />
+            <div class="invalid-feedback">Please choose a username.</div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"
+              >Email address</label
+            >
+            <input
+              placeholder="Email address"
+              type="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              required
+            />
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              >Password</label
+            >
+            <input
+              placeholder="Password"
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              >Confirm Password</label
+            >
+            <input
+              placeholder="Confirm Password"
+              type="password"
+              class="form-control"
+              id="exampleInputPassword2"
+              required
+            />
+          </div>
+
+          <button type="submit" class="main__button btn btn-danger">
+            Register
+          </button>
+          <div id="alreadyHaveAccount" class="form-text alreadyHaveAccount">
+            Already have an account?
+            <a href="/login">Login</a>
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
+
+  <link rel="stylesheet" href="stylesheets/register.css" />
+  <script src="javascripts/validation.js"></script>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <%- include('./partials/_head'); %>
+  <body>
+    <%- include('./partials/_navbar'); %>
+
+    <main class="main__container">
+      <div class="title__container">
+        <h1><%= title %></h1>
+        <p>Welcome to <%= title %> page:</p>
+      </div>
+
+      <form class="row g-3 d-flex justify-content-between">
+        <div class="col-auto">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"> Search </span>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Username"
+              aria-label="Username"
+              aria-describedby="basic-addon1"
+            />
+          </div>
+        </div>
+
+        <div class="col-auto">
+          <select class="form-select" aria-label="Default select example">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary mb-3">
+            Confirm identity
+          </button>
+        </div>
+      </form>
+
+      <ol class="list-group list-group-numbered">
+        <% for(var i=0; i < users.length; i++) {%>
+        <li
+          class="
+            list-group-item
+            d-flex
+            justify-content-between
+            align-items-start
+          "
+        >
+          <div class="ms-2 me-auto">
+            <div class="fw-bold"><%= users[i].name %></div>
+            <%= users[i].username %>
+          </div>
+          <div class="btns__list__item">
+            <button type="button" class="btn btn-success">See More Info</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </div>
+        </li>
+        <% } %>
+      </ol>
+    </main>
+  </body>
+  <link rel="stylesheet" href="/stylesheets/users.css" />
+</html>

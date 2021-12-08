@@ -1,0 +1,40 @@
+* {
+  box-sizing: border-box;
+}
+:root {
+  --teal-color: #75d8a6;
+  --blue-color: #3496f0;
+  --gray-color: #7c7c7c;
+}
+html {
+  font-family: "Open Sans";
+}
+
+.main__container {
+  margin-top: 50px;
+  display: grid;
+  place-content: center;
+}
+.main__title {
+  font-size: 24px;
+  color: var(--gray-color);
+}
+.main__button {
+  width: 100%;
+}
+.fa-user,
+.fa-lock {
+  font-size: 20px;
+  padding-right: 10px;
+  color: var(--gray-color);
+}
+.icon-input {
+  display: flex;
+  align-items: center;
+}
+.login__container {
+  padding: 20px;
+}
+.form-text {
+  text-align: right;
+}

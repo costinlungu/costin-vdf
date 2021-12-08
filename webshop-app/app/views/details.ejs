@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <%- include('./partials/_head'); %>
+
+  <body>
+    <%- include('./partials/_navbar'); %>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %> page</p>
+
+    <main class="main-container">
+      <div class="phone-container">
+        <img id="imgPhone" alt="Phone Image" />
+        <h2 id="name" class="name"></h2>
+        <p id="os" class="os"></p>
+        <p id="price" class="price"></p>
+        <p id="availability" class="availability"></p>
+      </div>
+    </main>
+
+    <script src="javascripts/detailsScript.js"></script>
+  </body>
+  <link rel="stylesheet" href="stylesheets/details.css" />
+</html>

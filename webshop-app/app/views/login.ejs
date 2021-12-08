@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/_head'); %>
+
+  <body class="body-container">
+    <%- include('./partials/_navbar'); %>
+
+    <main class="main__container">
+      <div class="login__container">
+        <h2 class="main__title">Login to your account</h2>
+        <hr />
+        <form class="form-login needs-validation" novalidate>
+          <div class="mb-3">
+            <div class="icon-input justify-content-evenly">
+              <i class="fas fa-user"></i>
+              <input
+                type="email"
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder="username"
+              />
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="icon-input justify-content-evenly">
+              <i class="fas fa-lock"></i>
+              <input
+                type="password"
+                class="form-control"
+                id="exampleInputPassword1"
+                placeholder="password"
+              />
+            </div>
+          </div>
+
+          <button type="submit" class="main__button btn btn-danger">
+            Login
+          </button>
+          <div id="emailHelp" class="form-text">
+            You don't have an account?<a href="/register">Register</a>
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
+  <link rel="stylesheet" href="stylesheets/login.css" />
+</html>

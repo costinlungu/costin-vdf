@@ -1,0 +1,97 @@
+* {
+  box-sizing: border-box;
+}
+:root {
+  --bkg-color-red: rgb(230, 0, 0);
+  --bkg-color-blue: rgb(13, 110, 253);
+  --text-color-black: rgb(0, 0, 0);
+  --bkg-color-gray: rgb(210, 213, 216);
+}
+
+.container-fluid {
+  display: flex;
+}
+.navbar-brand {
+  margin-left: 1rem;
+}
+.navbar-collapse {
+  justify-content: space-between;
+}
+.navbar-dark .navbar-nav .nav-link {
+  color: black;
+  font-size: 18px;
+}
+
+.main-container {
+  margin: auto;
+  margin-top: 50px;
+
+  display: block;
+  justify-content: center;
+
+  margin-top: 20px;
+  width: 90vw;
+  text-align: center;
+}
+.container-phones h2 {
+  color: var(--bkg-color-red);
+}
+.filters-group {
+  display: flex;
+  justify-content: space-evenly;
+}
+.filter-header {
+  font-weight: bold;
+}
+.filter-by-brand-p,
+.filter-by-price-p,
+.filter-by-os-p {
+  margin: 0;
+}
+
+.phone-container {
+  width: 90vw;
+  height: 80vh;
+  padding-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: var(--bkg-color-white);
+  text-align: center;
+  border: 1px solid var(--bkg-color-gray);
+  border-radius: 25px;
+}
+.phone-container ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 1em;
+}
+.phone-container li {
+  width: 25vw;
+  background-color: var(--bkg-color-red);
+  padding: 20px;
+}
+.imageClass {
+  width: 10vw;
+}
+.phone-container li h3,
+.phone-container li p {
+  margin: 0;
+}
+
+.phone {
+  list-style-type: none;
+}
+.phone a {
+  text-decoration: none;
+}
+.phone-container h2 {
+  margin-bottom: 3rem;
+}
+.phone-container {
+  font-size: 24px;
+}
+.discounted {
+  text-decoration: line-through;
+  color: rebeccapurple;
+}
