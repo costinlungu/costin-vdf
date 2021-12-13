@@ -8,118 +8,154 @@
     <p>Welcome to <%= title %> page</p>
 
     <div class="main-container">
-      <div class="menu-filters">
-        <div class="filters-group">
-          <div id="filter-by-brand" class="filter-by-brand">
-            <div class="filter-header">Brands:</div>
+      <form id="formFilters" action="/phones">
+        <div class="menu-filters">
+          <div class="filters-group">
+            <div id="filter-by-brand" class="filter-by-brand">
+              <div class="filter-header">Brands:</div>
 
-            <p id="text" class="filter-by-brand-p">
-              <input
-                value="samsung"
-                type="checkbox"
-                id="samsung"
-                class="samsung"
-              />
-              Samsung
-            </p>
-            <p id="text" class="filter-by-brand-p">
-              <input value="apple" type="checkbox" id="apple" class="apple" />
-              Apple
-            </p>
-            <p id="text" class="filter-by-brand-p">
-              <input
-                value="motorola"
-                type="checkbox"
-                id="motorola"
-                class="motorola"
-              />
-              Motorola
-            </p>
-            <p id="text" class="filter-by-brand-p">
-              <input
-                value="xiaomi"
-                type="checkbox"
-                id="xiaomi"
-                class="xiaomi"
-              />
-              Xiaomi
-            </p>
-            <p id="text" class="filter-by-brand-p">
-              <input
-                value="google"
-                type="checkbox"
-                id="google"
-                class="google"
-              />
-              Google
-            </p>
-          </div>
+              <p id="text" class="filter-by-brand-p">
+                <input
+                  value="Samsung"
+                  type="checkbox"
+                  id="samsung"
+                  class="samsung"
+                  name="brand[]"
+                />
+                Samsung
+              </p>
+              <p id="text" class="filter-by-brand-p">
+                <input
+                  value="Apple"
+                  type="checkbox"
+                  id="apple"
+                  class="apple"
+                  name="brand[]"
+                />
+                Apple
+              </p>
+              <p id="text" class="filter-by-brand-p">
+                <input
+                  value="Motorola"
+                  type="checkbox"
+                  id="motorola"
+                  class="motorola"
+                  name="brand[]"
+                />
+                Motorola
+              </p>
+              <p id="text" class="filter-by-brand-p">
+                <input
+                  value="Xiaomi"
+                  type="checkbox"
+                  id="xiaomi"
+                  class="xiaomi"
+                  name="brand[]"
+                />
+                Xiaomi
+              </p>
+              <p id="text" class="filter-by-brand-p">
+                <input
+                  value="Google"
+                  type="checkbox"
+                  id="google"
+                  class="google"
+                  name="brand[]"
+                />
+                Google
+              </p>
+            </div>
 
-          <div class="filter-by-price">
-            <div class="filter-header">Price:</div>
+            <div class="filter-by-price">
+              <div class="filter-header">Price:</div>
 
-            <form id="filter-by-price" class="filter-by-price">
-              <fieldset id="filter-by-price-fieldset">
-                <p id="text" class="filter-by-price-p">
-                  <input
-                    type="radio"
-                    value="-1500"
-                    name="filter-by-price-fieldset"
-                  />
-                  &#60;1500
-                </p>
-                <p id="text" class="filter-by-price-p">
-                  <input
-                    type="radio"
-                    value="1500-3000"
-                    name="filter-by-price-fieldset"
-                  />
-                  1500-3000
-                </p>
-                <p id="text" class="filter-by-price-p">
-                  <input
-                    type="radio"
-                    value="3000-"
-                    name="filter-by-price-fieldset"
-                  />
-                  &#62;3000
-                </p>
-              </fieldset>
-            </form>
-          </div>
-          <div id="filter-by-os" class="filter-by-os">
-            <div class="filter-header">OS:</div>
+              <form id="filter-by-price" class="filter-by-price">
+                <fieldset id="filter-by-price-fieldset">
+                  <p id="text" class="filter-by-price-p">
+                    <input type="radio" value="-1500" name="price" />
+                    &#60;1500
+                  </p>
+                  <p id="text" class="filter-by-price-p">
+                    <input type="radio" value="1500-3000" name="price" />
+                    1500-3000
+                  </p>
+                  <p id="text" class="filter-by-price-p">
+                    <input type="radio" value="3000-" name="price" />
+                    &#62;3000
+                  </p>
+                </fieldset>
+              </form>
+            </div>
+            <div id="filter-by-os" class="filter-by-os">
+              <div class="filter-header">OS:</div>
 
-            <p id="text" class="filter-by-os-p">
-              <input
-                value="android"
-                type="checkbox"
-                id="android"
-                class="android"
-              />
-              Android
-            </p>
-            <p id="text" class="filter-by-os-p">
-              <input value="ios" type="checkbox" id="ios" class="ios" />
-              iOS
-            </p>
-          </div>
-          <div class="filters-buttons">
-            <button id="search-filters-button" class="filter-button-search">
-              Search
-            </button>
-            <button
-              id="reset-filters-button"
-              class="filter-button-reset__filters"
-            >
-              Reset filters
-            </button>
+              <p id="text" class="filter-by-os-p">
+                <input
+                  value="Android"
+                  type="checkbox"
+                  id="android"
+                  class="android"
+                  name="os[]"
+                />
+                Android
+              </p>
+              <p id="text" class="filter-by-os-p">
+                <input
+                  value="iOS"
+                  type="checkbox"
+                  id="ios"
+                  class="ios"
+                  name="os[]"
+                />
+                iOS
+              </p>
+            </div>
+            <div class="filters-buttons">
+              <button
+                id="search-filters-button"
+                class="filter-button-search"
+                type="submit"
+              >
+                Search
+              </button>
+              <button
+                id="reset-filters-button"
+                class="filter-button-reset__filters"
+              >
+                Reset filters
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
 
-    <div id="container" class="phone-container"></div>
+    <div id="container" class="phone-container">
+      <ul>
+        <% for(let i=0; i<products.length; i++) {%>
+        <li class="phone">
+          <div class="phoneImage">
+            <img
+              class="imageClass"
+              src="<%=products[i].img %>"
+              alt="<%=products[i].name %>"
+            />
+          </div>
+          <h3 class="phoneName">
+            <a href="/details/<%=products[i].name %>" target="_blank"
+              ><%=products[i].brands %> <%=products[i].name %></a
+            >
+          </h3>
+          <p>
+            Sistem de operare: <span><%=products[i].operating_system %></span>
+          </p>
+          <p>Pret: <%=products[i].price %> lei</p>
+
+          <p>Rating: <%=products[i].rating %></p>
+        </li>
+        <%}%>
+      </ul>
+    </div>
 
     <script src="javascripts/appScript.js"></script>
   </body>
