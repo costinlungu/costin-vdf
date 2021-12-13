@@ -16,12 +16,29 @@ html {
   place-content: center;
 }
 .main__title {
-  font-size: 21px;
+  font-size: 24px;
   color: var(--gray-color);
 }
 .main__button {
   width: 100%;
 }
+.fa-user,
+.fa-lock {
+  font-size: 20px;
+  padding-right: 10px;
+  color: var(--gray-color);
+}
+.icon-input {
+  display: flex;
+  align-items: center;
+}
+.login__container {
+  padding: 20px;
+}
+.form-text {
+  text-align: right;
+}
+
 .alreadyHaveAccount {
   text-align: right;
 }
