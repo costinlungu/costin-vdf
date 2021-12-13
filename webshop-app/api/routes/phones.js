@@ -3,7 +3,7 @@ const fs = require("fs");
 var express = require("express");
 var router = express.Router();
 
-let products = fs.readFileSync(path.resolve("../products.json"));
+let products = fs.readFileSync("./products.json", "utf8");
 let parsedProducts = JSON.parse(products);
 
 /* GET details page. */
