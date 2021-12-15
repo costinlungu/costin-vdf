@@ -1,12 +1,27 @@
+const body = document.getElementById("body");
+const container = document.createElement("div");
+container.setAttribute("class", "container");
+
+const main = document.createElement("main");
+main.setAttribute("class", "main");
+
+window.addEventListener("hashchange", (e) => this.onRouteChange(e));
+
+window.onload = function (e) {
+  if (window.location.hash === "") {
+    window.location.hash = "/home/";
+  }
+  onRouteChange(e);
+};
+
 function cleanUpBody() {
+  let body = document.getElementsByTagName("body")[0];
   if (body) {
     body.querySelectorAll("*").forEach((n) => n.remove());
   }
 }
 
 function fetchHomepageData() {
-  cleanUpBody();
-
   fetch("http://localhost:3000/articles", {
     method: "get",
     headers: {
@@ -15,12 +30,36 @@ function fetchHomepageData() {
   })
     .then((response) => response.json())
     .then((data) => {
+      cleanUpBody();
+
       createHead();
-      renderNavbar();
+      createNavbar();
       createBtnAddArticle();
       renderArticle(data);
       renderFooter();
       body.appendChild(createModal());
+
+      let modalBtnAddArticle = document.querySelector(".button__addArticle");
+      let modalBg = document.querySelector(".modal__overlay");
+      let modalCancel = document.querySelector(".modal__cancel");
+      let modalSave = document.querySelector(".modal__save");
+      let modalBlur = document.querySelector(".container");
+      let btnReadMore = document.querySelector(".button__readMore");
+
+      modalBtnAddArticle.addEventListener("click", function () {
+        modalBlur.classList.add("bg-filter");
+        modalBg.classList.add("bg-active");
+      });
+      modalCancel.addEventListener("click", function () {
+        modalBlur.classList.remove("bg-filter");
+        modalBg.classList.remove("bg-active");
+      });
+      modalSave.addEventListener("click", function () {
+        modalSave.classList.remove("bg-active");
+      });
+      btnReadMore.addEventListener("click", function () {
+        document.location.href = "#/details/";
+      });
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -28,8 +67,6 @@ function fetchHomepageData() {
 }
 
 function fetchDetailsArticleData() {
-  cleanUpBody();
-
   fetch("http://localhost:3000/detailsArticle", {
     method: "get",
     headers: {
@@ -38,8 +75,10 @@ function fetchDetailsArticleData() {
   })
     .then((response) => response.json())
     .then((data) => {
+      cleanUpBody();
+
       createHead();
-      renderNavbar();
+      createNavbar();
       renderDetailsArticle(data);
       renderFooter();
     })
@@ -72,13 +111,6 @@ function createHead() {
   head.appendChild(linkStyleCSS);
 }
 
-const body = document.getElementById("body");
-const container = document.createElement("div");
-container.setAttribute("class", "container");
-
-const main = document.createElement("main");
-main.setAttribute("class", "main");
-
 function createNavbar() {
   let nav = document.createElement("nav");
   nav.setAttribute("class", "nav");
@@ -92,22 +124,22 @@ function createNavbar() {
   let navItemTravel = document.createElement("a");
   navItemTravel.setAttribute("class", "nav__link");
   navItemTravel.textContent = "Travel Updates";
-  navItemTravel.href = "#travel";
+  navItemTravel.href = "#/travel/";
 
   let navItemReviews = document.createElement("a");
   navItemReviews.setAttribute("class", "nav__link");
   navItemReviews.textContent = "Review";
-  navItemReviews.href = "#review";
+  navItemReviews.href = "#/review/";
 
   let navItemAbout = document.createElement("a");
   navItemAbout.setAttribute("class", "nav__link");
   navItemAbout.textContent = "About";
-  navItemAbout.href = "#about";
+  navItemAbout.href = "#/about/";
 
   let navItemContact = document.createElement("a");
   navItemContact.setAttribute("class", "nav__link");
   navItemContact.textContent = "Contact";
-  navItemContact.href = "#contact";
+  navItemContact.href = "#/contact/";
 
   let divTheme = document.createElement("div");
   divTheme.setAttribute("class", "theme-switch-wrapper");
@@ -139,7 +171,7 @@ function createNavbar() {
   navItem.appendChild(navItemAbout);
   navItem.appendChild(navItemContact);
 
-  return container;
+  toggleSwitch();
 }
 
 function createBtnAddArticle() {
@@ -372,7 +404,7 @@ function renderFooter() {
 
 function generateHomePage() {
   createHead();
-  renderNavbar();
+  createNavbar();
   createBtnAddArticle();
   renderArticle(article);
   renderFooter();
@@ -450,90 +482,47 @@ function renderDetailsArticle(detailsArticle) {
 
 function generateDetailsPage() {
   createHead();
-  renderNavbar();
+  createNavbar();
   renderDetailsArticle(detailsArticle);
   renderFooter();
 }
 
-class IndexView {
-  constructor() {
-    window.addEventListener("hashchange", (e) => this.onRouteChange(e));
-    this.body = document.getElementById("body");
-  }
+function onRouteChange(e) {
+  const hashLocation = window.location.hash.substring(1);
+  this.loadContent(hashLocation);
+  console.log(hashLocation);
+}
 
-  onRouteChange(e) {
-    const hashLocation = window.location.hash.substring(1);
-    this.loadContent(hashLocation);
-  }
+function loadContent(uri) {
+  const contentUri = `${uri}`;
 
-  loadContent(uri) {
-    const contentUri = `${uri}`;
-
-    cleanUpBody();
-
-    switch (contentUri) {
-      case "home":
-        // generateHomePage();
-        fetchHomepageData();
-        break;
-      case "details":
-        // generateDetailsPage();
-        fetchDetailsArticleData();
-        break;
-      default:
-        let message = document.createElement("h1");
-        message.innerText = "Page not found";
-        body.appendChild(message);
-        break;
-    }
-
-    if (contentUri === "home") {
-      var modalBtnAddArticle = document.querySelector(".button__addArticle");
-      var modalBg = document.querySelector(".modal__overlay");
-      var modalCancel = document.querySelector(".modal__cancel");
-      var modalSave = document.querySelector(".modal__save");
-      var modalBlur = document.querySelector(".container");
-      var btnReadMore = document.querySelector(".button__readMore");
-
-      modalBtnAddArticle.addEventListener("click", function () {
-        modalBlur.classList.add("bg-filter");
-        modalBg.classList.add("bg-active");
-      });
-      modalCancel.addEventListener("click", function () {
-        modalBlur.classList.remove("bg-filter");
-        modalBg.classList.remove("bg-active");
-      });
-      modalSave.addEventListener("click", function () {
-        modalSave.classList.remove("bg-active");
-      });
-      btnReadMore.addEventListener("click", function () {
-        document.location.href = "#details";
-      });
-    }
-
-    const toggleSwitch = document.querySelector(
-      '.theme-switch input[type="checkbox"]'
-    );
-    function switchTheme(e) {
-      if (e.target.checked) {
-        document.documentElement.setAttribute("data-theme", "dark");
-      } else {
-        document.documentElement.setAttribute("data-theme", "light");
-      }
-    }
-    toggleSwitch.addEventListener("change", switchTheme, false);
-  }
-
-  updateSlot(content) {
-    this.slot.innerHTML = content;
+  switch (contentUri) {
+    case "/home/":
+      // generateHomePage();
+      fetchHomepageData();
+      break;
+    case "/details/":
+      // generateDetailsPage();
+      fetchDetailsArticleData();
+      break;
+    default:
+      let message = document.createElement("h1");
+      message.innerText = "Page not found";
+      body.appendChild(message);
+      break;
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("dom");
-
-  console.log(window.location.hash);
-  new IndexView();
-
-  window.location.hash = "#home";
-});
+function toggleSwitch() {
+  const toggleSwitch = document.querySelector(
+    '.theme-switch input[type="checkbox"]'
+  );
+  function switchTheme(e) {
+    if (e.target.checked) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  }
+  toggleSwitch.addEventListener("change", switchTheme, false);
+}
