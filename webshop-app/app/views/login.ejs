@@ -7,9 +7,26 @@
 
     <main class="main__container">
       <div class="login__container">
+        <%if (register==='true') { %>
+        <div class="alert alert-success" role="alert">
+          Successfully registered!
+        </div>
+        <% } %> <%if (error==='true') { %>
+        <div class="alert alert-danger" role="alert">
+          Credentials do not match!
+        </div>
+        <% } %>
+
         <h2 class="main__title">Login to your account</h2>
         <hr />
-        <form id="form" class="form-login needs-validation" novalidate>
+
+        <form
+          id="form"
+          class="form-login needs-validation"
+          method="post"
+          action="/auth/login"
+          novalidate
+        >
           <div class="mb-3">
             <div class="icon-input justify-content-evenly">
               <i class="fas fa-user"></i>
@@ -45,5 +62,5 @@
     </main>
   </body>
   <link rel="stylesheet" href="stylesheets/auth.css" />
-  <script src="javascripts/validation.js"></script>
+  <!-- <script src="javascripts/validation.js"></script> -->
 </html>

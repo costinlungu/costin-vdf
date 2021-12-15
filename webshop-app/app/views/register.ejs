@@ -10,9 +10,18 @@
         <h1 class="main__title">Register a new account</h1>
         <hr />
 
-        <form id="form" class="form-login needs-validation" novalidate>
+        <form
+          id="form"
+          class="form-login needs-validation"
+          method="POST"
+          action="/auth/register"
+          novalidate
+        >
           <div class="mb-3">
-            <label for="validationCustomUsername" class="form-label"
+            <label
+              id="username"
+              for="validationCustomUsername"
+              class="form-label"
               >Username</label
             >
             <input
@@ -21,6 +30,7 @@
               class="form-control"
               id="validationCustomUsername"
               aria-describedby="emailHelp"
+              name="username"
               required
             />
             <div class="invalid-feedback">Please choose a username.</div>
@@ -35,6 +45,7 @@
               class="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
+              name="email"
               required
             />
             <div class="valid-feedback">Looks good!</div>
@@ -48,6 +59,7 @@
               type="password"
               class="form-control"
               id="exampleInputPassword1"
+              name="password"
               required
             />
           </div>
@@ -60,6 +72,7 @@
               type="password"
               class="form-control"
               id="exampleInputPassword2"
+              name="confirmPassword"
               required
             />
           </div>

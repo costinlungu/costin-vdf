@@ -1,13 +1,12 @@
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const isValid = validateRegisterForm();
-
-  const form = document.getElementById("form");
-  const errorElement = document.getElementById("error");
+  const isValid = validateRegisterForm(); // Front-End validation
 
   if (isValid) {
-    // TODO: submit form
+    // submit form
+    const form = document.getElementById("form");
+    form.submit();
   }
 });
 
@@ -15,7 +14,7 @@ function validateRegisterForm() {
   let isValid = true;
 
   const username = document.getElementById("username");
-  removeAddInfiniteChildsOnSubmitBtnError(username.parentElement);
+  removeAddInfiniteChildsOnSubmit(username.parentElement);
   if (!username.value) {
     isValid = false;
     username.parentElement.insertAdjacentHTML(
@@ -31,20 +30,38 @@ function validateRegisterForm() {
   }
 
   const email = document.getElementById("email");
+  removeAddInfiniteChildsOnSubmit(email.parentElement);
   const pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+  if (!pattern.test(email.value)) {
+    email.parentElement.insertAdjacentElement(
+      "beforeend",
+      '<p class="error">Email is not valid</p>'
+    );
+  }
 
   const password = document.getElementById("password");
-  const confirmPassword = document.getElementById("confirmPassword");
+  removeAddInfiniteChildsOnSubmit(password.parentElement);
   if (password.value.length <= 6 || password.value.length >= 20) {
-    // TODO:
+    isValid = false;
+    password.parentElement.insertAdjacentHTML(
+      "beforeend",
+      '<p class="error">Password must be between 6 an 20</p>'
+    );
   }
+
+  const confirmPassword = document.getElementById("confirmPassword");
   if (confirmPassword.value !== password.value) {
-    // TODO:
+    isValid = false;
+    password.parentElement.insertAdjacentHTML(
+      "beforeend",
+      '<p class="error">Password do not match</p>'
+    );
   }
+
   return isValid;
 }
 
-function removeAddInfiniteChildsOnSubmitBtnError(parent) {
+function removeAddInfiniteChildsOnSubmit(parent) {
   const errors = parent.getElementsByClassName("error");
 
   if (errors.length > 0) {
