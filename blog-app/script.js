@@ -63,42 +63,54 @@ function fetchHomepageData() {
 }
 
 function fetchDetailsArticleData(id) {
-  fetch("http://localhost:3000/detailsArticle/" + id, {
-    method: "get",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      cleanUpBody();
-
-      createHead();
-      createNavbar();
-      renderDetailsArticle(data);
-
-      fetch(`http://localhost:3000/articles`)
-        .then(function (response) {
-          // Examine the text in the response
-          response.json().then(function (data) {
-            if (response.status !== 200) {
-              console.log(
-                "Looks like there was a problem. Status Code: " +
-                  response.status
-              );
-              return;
-            } else {
-              renderFooterDetails(data);
-            }
-          });
-        })
-        .catch(function (err) {
-          console.log("Fetch Error :-S", err);
-        });
+  if (id) {
+    fetch("http://localhost:3000/detailsArticle/" + id, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+      .then(function (response) {
+        response.json().then(function (data) {
+          console.log(response.status);
+
+          if (response.status === 200) {
+            cleanUpBody();
+
+            createHead();
+            createNavbar();
+            renderDetailsArticle(data);
+
+            fetch(`http://localhost:3000/articles`)
+              .then(function (response) {
+                // Examine the text in the response
+                response.json().then(function (data) {
+                  if (response.status !== 200) {
+                    console.log(
+                      "Looks like there was a problem. Status Code: " +
+                        response.status
+                    );
+                    return;
+                  } else {
+                    renderFooterDetails(data);
+                  }
+                });
+              })
+              .catch(function (err) {
+                console.log("Fetch Error :-S", err);
+              });
+          } else {
+            body.innerHTML = "404 Not Found";
+          }
+        });
+      })
+
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  } else {
+    body.innerHTML = "404 Not Found";
+  }
 }
 
 function createHead() {
