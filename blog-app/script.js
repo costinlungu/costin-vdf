@@ -44,7 +44,6 @@ function fetchHomepageData() {
       let modalCancel = document.querySelector(".modal__cancel");
       let modalSave = document.querySelector(".modal__save");
       let modalBlur = document.querySelector(".container");
-      let btnReadMore = document.querySelector(".button__readMore");
 
       modalBtnAddArticle.addEventListener("click", function () {
         modalBlur.classList.add("bg-filter");
@@ -57,17 +56,14 @@ function fetchHomepageData() {
       modalSave.addEventListener("click", function () {
         modalSave.classList.remove("bg-active");
       });
-      btnReadMore.addEventListener("click", function () {
-        document.location.href = "#/details/";
-      });
     })
     .catch((error) => {
       console.error("Error:", error);
     });
 }
 
-function fetchDetailsArticleData() {
-  fetch("http://localhost:3000/detailsArticle", {
+function fetchDetailsArticleData(id) {
+  fetch("http://localhost:3000/detailsArticle/" + id, {
     method: "get",
     headers: {
       "Content-Type": "application/json",
@@ -80,7 +76,25 @@ function fetchDetailsArticleData() {
       createHead();
       createNavbar();
       renderDetailsArticle(data);
-      renderFooter();
+
+      fetch(`http://localhost:3000/articles`)
+        .then(function (response) {
+          // Examine the text in the response
+          response.json().then(function (data) {
+            if (response.status !== 200) {
+              console.log(
+                "Looks like there was a problem. Status Code: " +
+                  response.status
+              );
+              return;
+            } else {
+              renderFooterDetails(data);
+            }
+          });
+        })
+        .catch(function (err) {
+          console.log("Fetch Error :-S", err);
+        });
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -239,7 +253,8 @@ function createArticle(article) {
     divContentContainer.appendChild(paragraph1);
     divContentContainer.appendChild(paragraph2);
 
-    domArticle.appendChild(createBtnReadMore());
+    // ================================
+    domArticle.appendChild(createBtnReadMore(article[i].id));
   }
   return main;
 }
@@ -263,15 +278,19 @@ function createBtnsArticle() {
   return divBtn;
 }
 
-function createBtnReadMore() {
+function createBtnReadMore(id) {
   let divBtn = document.createElement("div");
   divBtn.setAttribute("class", "readmore__container");
+
+  let aBtnReadMore = document.createElement("a");
+  aBtnReadMore.setAttribute("href", "#/details/" + id);
+  divBtn.appendChild(aBtnReadMore);
 
   let readMoreBtn = document.createElement("button");
   readMoreBtn.setAttribute("type", "button");
   readMoreBtn.setAttribute("class", "button button__readMore");
   readMoreBtn.textContent = " Read More ";
-  divBtn.appendChild(readMoreBtn);
+  aBtnReadMore.appendChild(readMoreBtn);
 
   return divBtn;
 }
@@ -292,6 +311,45 @@ function createFooter() {
 
   footer.appendChild(divBtnPrevious);
   footer.appendChild(divBtnNext);
+
+  return footer;
+}
+
+function createFooterDetails(articles) {
+  const url = window.location.hash.substring(1);
+  const id = Number(url.slice(9));
+
+  let footer = document.createElement("footer");
+  footer.setAttribute("class", "footer");
+
+  let articlesId = articles.map((article) => article.id);
+  let index = articlesId.indexOf(id);
+
+  if (id > 1) {
+    let aBtnPrevious = document.createElement("a");
+    aBtnPrevious.setAttribute("href", "#/details/" + articlesId[index - 1]);
+    footer.appendChild(aBtnPrevious);
+
+    let divBtnPrevious = document.createElement("button");
+    divBtnPrevious.setAttribute("type", "button");
+    divBtnPrevious.setAttribute("class", "footer__link");
+    divBtnPrevious.textContent = "previous";
+    aBtnPrevious.appendChild(divBtnPrevious);
+  }
+  if (index < articles.length - 1) {
+    let divFalsePrevious = document.createElement("div");
+    footer.appendChild(divFalsePrevious);
+
+    let aBtnNext = document.createElement("a");
+    aBtnNext.setAttribute("href", "#/details/" + articlesId[index + 1]);
+    footer.appendChild(aBtnNext);
+
+    let divBtnNext = document.createElement("button");
+    divBtnNext.setAttribute("type", "button");
+    divBtnNext.setAttribute("class", "footer__link footer__link--next");
+    divBtnNext.textContent = "next";
+    aBtnNext.appendChild(divBtnNext);
+  }
 
   return footer;
 }
@@ -401,6 +459,10 @@ function renderFooter() {
   const footer = createFooter();
   container.appendChild(footer);
 }
+function renderFooterDetails(articles) {
+  const footer = createFooterDetails(articles);
+  container.appendChild(footer);
+}
 
 function generateHomePage() {
   createHead();
@@ -490,26 +552,22 @@ function generateDetailsPage() {
 function onRouteChange(e) {
   const hashLocation = window.location.hash.substring(1);
   this.loadContent(hashLocation);
-  console.log(hashLocation);
 }
 
 function loadContent(uri) {
   const contentUri = `${uri}`;
 
-  switch (contentUri) {
-    case "/home/":
-      // generateHomePage();
-      fetchHomepageData();
-      break;
-    case "/details/":
-      // generateDetailsPage();
-      fetchDetailsArticleData();
-      break;
-    default:
-      let message = document.createElement("h1");
-      message.innerText = "Page not found";
-      body.appendChild(message);
-      break;
+  if (contentUri === "/home/") {
+    // generateHomePage();
+    fetchHomepageData();
+  } else if (contentUri.startsWith("/details/")) {
+    // generateDetailsPage();
+    let id = contentUri.slice(9);
+    fetchDetailsArticleData(id);
+  } else {
+    let message = document.createElement("h1");
+    message.innerText = "Page not found";
+    body.appendChild(message);
   }
 }
 
