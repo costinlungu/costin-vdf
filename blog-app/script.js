@@ -345,7 +345,7 @@ function createFooterDetails(articles) {
     let divBtnPrevious = document.createElement("button");
     divBtnPrevious.setAttribute("type", "button");
     divBtnPrevious.setAttribute("class", "footer__link");
-    divBtnPrevious.textContent = "previous";
+    divBtnPrevious.textContent = "previous article";
     aBtnPrevious.appendChild(divBtnPrevious);
   }
   if (index < articles.length - 1) {
@@ -359,7 +359,7 @@ function createFooterDetails(articles) {
     let divBtnNext = document.createElement("button");
     divBtnNext.setAttribute("type", "button");
     divBtnNext.setAttribute("class", "footer__link footer__link--next");
-    divBtnNext.textContent = "next";
+    divBtnNext.textContent = "next article";
     aBtnNext.appendChild(divBtnNext);
   }
 
