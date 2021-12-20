@@ -33,15 +33,17 @@ function validateRegisterForm() {
   }
 
   const email = document.getElementById("email");
-  removeAddInfiniteChildsOnSubmit(email.parentElement);
-  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-  if (!emailRegex.test(email.value)) {
-    isValid = false;
-    email.parentElement.insertAdjacentHTML(
-      "beforeend",
-      '<p class="error">Email is not valid</p>'
-    );
-    return;
+  if (email) {
+    removeAddInfiniteChildsOnSubmit(email.parentElement);
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    if (!emailRegex.test(email.value)) {
+      isValid = false;
+      email.parentElement.insertAdjacentHTML(
+        "beforeend",
+        '<p class="error">Email is not valid</p>'
+      );
+      return;
+    }
   }
 
   const password = document.getElementById("password");
@@ -61,14 +63,16 @@ function validateRegisterForm() {
   }
 
   const confirmPassword = document.getElementById("confirmPassword");
-  removeAddInfiniteChildsOnSubmit(confirmPassword.parentElement);
-  if (confirmPassword.value !== password.value) {
-    isValid = false;
-    confirmPassword.parentElement.insertAdjacentHTML(
-      "beforeend",
-      '<p class="error">Password do not match</p>'
-    );
-    return;
+  if (confirmPassword) {
+    removeAddInfiniteChildsOnSubmit(confirmPassword.parentElement);
+    if (confirmPassword.value !== password.value) {
+      isValid = false;
+      confirmPassword.parentElement.insertAdjacentHTML(
+        "beforeend",
+        '<p class="error">Password do not match</p>'
+      );
+      return;
+    }
   }
 
   return isValid;
