@@ -2,6 +2,7 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const isValid = validateRegisterForm(); // Front-End validation
+  console.log(isValid);
 
   if (isValid) {
     // submit form
@@ -15,47 +16,59 @@ function validateRegisterForm() {
 
   const username = document.getElementById("username");
   removeAddInfiniteChildsOnSubmit(username.parentElement);
-  if (!username.value) {
+  const usernameRegex =
+    /^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/g;
+  if (
+    !username.value ||
+    username.value.length < 3 ||
+    username.value.length > 20 ||
+    !usernameRegex.test(username.value)
+  ) {
     isValid = false;
     username.parentElement.insertAdjacentHTML(
       "beforeend",
-      '<p class="error">Username is not valid</p>'
+      '<p class="error">Username must be between 3 and 20 characters! Could not contain dots or hyphens at the beginning or end!</p>'
     );
-  } else if (username.value.length < 3 || username.value.length > 20) {
-    isValid = false;
-    username.parentElement.insertAdjacentElement(
-      "beforeend",
-      '<p class="error">Username is not valid</p>'
-    );
+    return;
   }
 
   const email = document.getElementById("email");
   removeAddInfiniteChildsOnSubmit(email.parentElement);
-  const pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-  if (!pattern.test(email.value)) {
-    email.parentElement.insertAdjacentElement(
+  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+  if (!emailRegex.test(email.value)) {
+    isValid = false;
+    email.parentElement.insertAdjacentHTML(
       "beforeend",
       '<p class="error">Email is not valid</p>'
     );
+    return;
   }
 
   const password = document.getElementById("password");
   removeAddInfiniteChildsOnSubmit(password.parentElement);
-  if (password.value.length <= 6 || password.value.length >= 20) {
+  const regexPassword = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+  if (
+    !regexPassword.test(password.value) ||
+    password.value.length < 6 ||
+    password.value.length > 20
+  ) {
     isValid = false;
     password.parentElement.insertAdjacentHTML(
       "beforeend",
-      '<p class="error">Password must be between 6 an 20</p>'
+      '<p class="error">Password should contain minimum six characters (at least): \n-one uppercase letter, \n-one lowercase letter, \n-one number and \n-one special character.</p>'
     );
+    return;
   }
 
   const confirmPassword = document.getElementById("confirmPassword");
+  removeAddInfiniteChildsOnSubmit(confirmPassword.parentElement);
   if (confirmPassword.value !== password.value) {
     isValid = false;
-    password.parentElement.insertAdjacentHTML(
+    confirmPassword.parentElement.insertAdjacentHTML(
       "beforeend",
       '<p class="error">Password do not match</p>'
     );
+    return;
   }
 
   return isValid;

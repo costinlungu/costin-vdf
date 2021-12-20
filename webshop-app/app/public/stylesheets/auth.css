@@ -1,11 +1,14 @@
-* {
-  box-sizing: border-box;
-}
 :root {
   --teal-color: #75d8a6;
   --blue-color: #3496f0;
   --gray-color: #7c7c7c;
+  --red-color-error: #ff0000;
 }
+
+* {
+  box-sizing: border-box;
+}
+
 html {
   font-family: "Open Sans";
 }
@@ -44,4 +47,11 @@ html {
 }
 .login__container {
   padding: 20px;
+}
+
+/* validation.js */
+.error {
+  color: var(--red-color-error);
+  width: 250px;
+  white-space: pre-wrap;
 }
