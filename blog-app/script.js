@@ -1,3 +1,5 @@
+import { backendUrl } from "./constantsAPI";
+
 function cleanUpBody() {
   if (body) {
     body.querySelectorAll("*").forEach((n) => n.remove());
@@ -7,12 +9,16 @@ function cleanUpBody() {
 function fetchHomepageData() {
   cleanUpBody();
 
-  fetch("http://localhost:3000/articles", {
-    method: "get",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
+  fetch(
+    // "http://localhost:3000/articles"
+    backendUrl.resources.articles,
+    {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  )
     .then((response) => response.json())
     .then((data) => {
       createHead();
@@ -30,12 +36,16 @@ function fetchHomepageData() {
 function fetchDetailsArticleData() {
   cleanUpBody();
 
-  fetch("http://localhost:3000/detailsArticle", {
-    method: "get",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
+  fetch(
+    // backendUrl.resources.detailsArticle
+    "http://localhost:3000/detailsArticle",
+    {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  )
     .then((response) => response.json())
     .then((data) => {
       createHead();
